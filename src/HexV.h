@@ -25,13 +25,24 @@ class HexV : public Gtk::Window
   // Window
   Gtk::HeaderBar* headerBar;
   Gtk::MenuBar* menubar;
+  
+  // File menu
+  Gtk::Menu* fileMenu;
   Gtk::MenuItem* filePlaceHolder;
   Gtk::MenuItem* openPlaceHolder;
   Gtk::MenuItem* closePlaceHolder;
+  
+  // Search
+  Gtk::Menu* searchMenu;
+  Gtk::MenuItem* searchPlaceHolder;
+  Gtk::MenuItem* positionPlaceHolder;
+  Gtk::MenuItem* valuePlaceHolder;
+  
+  // Help menu
+  Gtk::Menu* helpMenu;
   Gtk::MenuItem* helpPlaceHolder;
   Gtk::MenuItem* aboutPlaceHolder;
-  Gtk::Menu* fileMenu;
-  Gtk::Menu* helpMenu;
+  
   Gtk::Box* bigBox;
 
   Gtk::Label* position;

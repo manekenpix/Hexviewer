@@ -30,10 +30,14 @@ HexV::HexV()
   filePlaceHolder = Gtk::manage( new Gtk::MenuItem( "_File", true ) );
   openPlaceHolder = Gtk::manage( new Gtk::MenuItem( "_Open", true ) );
   closePlaceHolder = Gtk::manage( new Gtk::MenuItem( "_Close", true ) );
+  searchPlaceHolder = Gtk::manage( new Gtk::MenuItem( "_Search", true ) );
+  positionPlaceHolder = Gtk::manage( new Gtk::MenuItem( "_Position", true ) );
+  valuePlaceHolder = Gtk::manage( new Gtk::MenuItem( "_Value", true ) );
   helpPlaceHolder = Gtk::manage( new Gtk::MenuItem( "_Help", true ) );
   aboutPlaceHolder = Gtk::manage( new Gtk::MenuItem( "_About", true ) );
 
   fileMenu = Gtk::manage( new Gtk::Menu() );
+  searchMenu = Gtk::manage( new Gtk::Menu() );
   helpMenu = Gtk::manage( new Gtk::Menu() );
 
   // Boxes
@@ -44,6 +48,11 @@ HexV::HexV()
   filePlaceHolder->set_submenu( *fileMenu );
   fileMenu->append( *openPlaceHolder );
   fileMenu->append( *closePlaceHolder );
+
+  menubar->append( *searchPlaceHolder );
+  searchPlaceHolder->set_submenu( *searchMenu );
+  searchMenu->append( *positionPlaceHolder );
+  searchMenu->append( *valuePlaceHolder );
 
   menubar->append( *helpPlaceHolder );
   helpPlaceHolder->set_submenu( *helpMenu );
