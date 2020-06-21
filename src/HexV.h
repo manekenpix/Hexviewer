@@ -29,19 +29,19 @@ class HexV : public Gtk::Window
   // File menu
   Gtk::Menu* fileMenu;
   Gtk::MenuItem* filePlaceHolder;
-  Gtk::MenuItem* openPlaceHolder;
-  Gtk::MenuItem* closePlaceHolder;
+  Gtk::MenuItem* openMenuItem;
+  Gtk::MenuItem* closeMenuItem;
   
   // Search
   Gtk::Menu* searchMenu;
   Gtk::MenuItem* searchPlaceHolder;
-  Gtk::MenuItem* positionPlaceHolder;
-  Gtk::MenuItem* valuePlaceHolder;
+  Gtk::MenuItem* positionMenuItem;
+  Gtk::MenuItem* valueMenuItem;
   
   // Help menu
   Gtk::Menu* helpMenu;
   Gtk::MenuItem* helpPlaceHolder;
-  Gtk::MenuItem* aboutPlaceHolder;
+  Gtk::MenuItem* aboutMenuItem;
   
   Gtk::Box* bigBox;
 

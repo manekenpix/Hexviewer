@@ -28,13 +28,13 @@ HexV::HexV()
   menubar = Gtk::manage( new Gtk::MenuBar() );
 
   filePlaceHolder = Gtk::manage( new Gtk::MenuItem( "_File", true ) );
-  openPlaceHolder = Gtk::manage( new Gtk::MenuItem( "_Open", true ) );
-  closePlaceHolder = Gtk::manage( new Gtk::MenuItem( "_Close", true ) );
+  openMenuItem = Gtk::manage( new Gtk::MenuItem( "_Open", true ) );
+  closeMenuItem = Gtk::manage( new Gtk::MenuItem( "_Close", true ) );
   searchPlaceHolder = Gtk::manage( new Gtk::MenuItem( "_Search", true ) );
-  positionPlaceHolder = Gtk::manage( new Gtk::MenuItem( "_Position", true ) );
-  valuePlaceHolder = Gtk::manage( new Gtk::MenuItem( "_Value", true ) );
+  positionMenuItem = Gtk::manage( new Gtk::MenuItem( "_Position", true ) );
+  valueMenuItem = Gtk::manage( new Gtk::MenuItem( "_Value", true ) );
   helpPlaceHolder = Gtk::manage( new Gtk::MenuItem( "_Help", true ) );
-  aboutPlaceHolder = Gtk::manage( new Gtk::MenuItem( "_About", true ) );
+  aboutMenuItem = Gtk::manage( new Gtk::MenuItem( "_About", true ) );
 
   fileMenu = Gtk::manage( new Gtk::Menu() );
   searchMenu = Gtk::manage( new Gtk::Menu() );
@@ -46,17 +46,17 @@ HexV::HexV()
   // Menubar
   menubar->append( *filePlaceHolder );
   filePlaceHolder->set_submenu( *fileMenu );
-  fileMenu->append( *openPlaceHolder );
-  fileMenu->append( *closePlaceHolder );
+  fileMenu->append( *openMenuItem );
+  fileMenu->append( *closeMenuItem );
 
   menubar->append( *searchPlaceHolder );
   searchPlaceHolder->set_submenu( *searchMenu );
-  searchMenu->append( *positionPlaceHolder );
-  searchMenu->append( *valuePlaceHolder );
+  searchMenu->append( *positionMenuItem );
+  searchMenu->append( *valueMenuItem );
 
   menubar->append( *helpPlaceHolder );
   helpPlaceHolder->set_submenu( *helpMenu );
-  helpMenu->append( *aboutPlaceHolder );
+  helpMenu->append( *aboutMenuItem );
 
   // Targets
   listTargets.push_back( Gtk::TargetEntry( "text/uri-list" ) );
@@ -93,11 +93,11 @@ HexV::HexV()
   bigBox->pack_start( *scrolledWindow, true, true, 0 );
 
   // Events
-  openPlaceHolder->signal_activate().connect(
+  openMenuItem->signal_activate().connect(
     sigc::mem_fun( *this, &HexV::openFile ) );
-  closePlaceHolder->signal_activate().connect(
+  closeMenuItem->signal_activate().connect(
     sigc::mem_fun( *this, &HexV::exit ) );
-  aboutPlaceHolder->signal_activate().connect(
+  aboutMenuItem->signal_activate().connect(
     sigc::mem_fun( *this, &HexV::about ) );
   textView->signal_drag_data_received().connect(
     sigc::mem_fun( *this, &HexV::openDroppedFile ) );
