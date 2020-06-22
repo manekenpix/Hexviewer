@@ -99,6 +99,8 @@ HexV::HexV()
     sigc::mem_fun( *this, &HexV::exit ) );
   aboutMenuItem->signal_activate().connect(
     sigc::mem_fun( *this, &HexV::about ) );
+  positionMenuItem->signal_activate().connect(
+    sigc::mem_fun( *this, &HexV::searchPosition ) );
   textView->signal_drag_data_received().connect(
     sigc::mem_fun( *this, &HexV::openDroppedFile ) );
 
@@ -225,6 +227,37 @@ HexV::about()
     Gdk::Pixbuf::create_from_file( "hv.png", 100, 100, true );
   aboutD.set_logo( logo );
   aboutD.run();
+}
+
+void
+HexV::searchPosition()
+{
+  Gtk::Label* positionLabel =
+    Gtk::manage( new Gtk::Label( "Enter position " ) );
+  Gtk::Entry* positionEntry = Gtk::manage( new Gtk::Entry() );
+
+  Gtk::Dialog positionDialog( "Search Position", *this, true );
+  Gtk::Button* okButton = positionDialog.add_button( "Ok", 1 );
+  Gtk::Button* cancelButton = positionDialog.add_button( "Cancel", 0 );
+  positionDialog.get_action_area()->set_layout( Gtk::BUTTONBOX_SPREAD );
+
+  positionEntry->set_activates_default( true );
+  okButton->set_can_default();
+  okButton->grab_default();
+
+  positionDialog.set_size_request( 200, 100 );
+  positionDialog.get_vbox()->pack_start( *positionLabel, Gtk::PACK_SHRINK, 10 );
+  positionDialog.get_vbox()->pack_start( *positionEntry, Gtk::PACK_SHRINK, 10 );
+  positionDialog.show_all();
+
+  uint8_t response = positionDialog.run();
+
+  if ( response ) {
+    std::cout << "The response was ok\n";
+    std::cout << "The text in the entry is: " << positionEntry->get_text();
+  } else {
+    std::cout << "The response was cancel\n";
+  }
 }
 
 void

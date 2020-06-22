@@ -45,7 +45,6 @@ class HexV : public Gtk::Window
   
   Gtk::Box* bigBox;
 
-  Gtk::Label* position;
   Gtk::ScrolledWindow* scrolledWindow;
   Gtk::TextView* textView;
   Glib::RefPtr<Gtk::CssProvider> cssProvider;
@@ -69,6 +68,7 @@ class HexV : public Gtk::Window
   {
     return ( c < 10 ? ( c += 48 ) : ( c += 55 ) );
   };
+  void searchPosition();
   void about();
   void errorMessage( const Glib::ustring& text, const Glib::ustring& subtext );
   void exit() { hide(); };
