@@ -125,9 +125,9 @@ HexV::openFile()
       parseFilePath( Glib::ustring( fileDialog.get_filename() ) );
       process();
     } else
-      errorMessage( "Error Opening File", "File already open" );
+      errorDialog( "Error Opening File", "File already open" );
   } else
-    errorMessage( "Error Opening File",
+    errorDialog( "Error Opening File",
                   "There was a problem opening the file" );
 }
 
@@ -150,7 +150,7 @@ HexV::openDroppedFile( const Glib::RefPtr<Gdk::DragContext>& context,
       process();
     }
   } else
-    errorMessage( "Error Opening File",
+    errorDialog( "Error Opening File",
                   "There was a problem accessing the file" );
 }
 
@@ -232,36 +232,42 @@ HexV::about()
 void
 HexV::searchPosition()
 {
-  Gtk::Label* positionLabel =
-    Gtk::manage( new Gtk::Label( "Enter position " ) );
-  Gtk::Entry* positionEntry = Gtk::manage( new Gtk::Entry() );
-
-  Gtk::Dialog positionDialog( "Search Position", *this, true );
-  Gtk::Button* okButton = positionDialog.add_button( "Ok", 1 );
-  Gtk::Button* cancelButton = positionDialog.add_button( "Cancel", 0 );
-  positionDialog.get_action_area()->set_layout( Gtk::BUTTONBOX_SPREAD );
-
-  positionEntry->set_activates_default( true );
-  okButton->set_can_default();
-  okButton->grab_default();
-
-  positionDialog.set_size_request( 200, 100 );
-  positionDialog.get_vbox()->pack_start( *positionLabel, Gtk::PACK_SHRINK, 10 );
-  positionDialog.get_vbox()->pack_start( *positionEntry, Gtk::PACK_SHRINK, 10 );
-  positionDialog.show_all();
-
-  uint8_t response = positionDialog.run();
-
-  if ( response ) {
-    std::cout << "The response was ok\n";
-    std::cout << "The text in the entry is: " << positionEntry->get_text();
+  if ( !openedFile.name.length() ) {
+    errorDialog( "Error", "There are no opened files" );
   } else {
-    std::cout << "The response was cancel\n";
+    Gtk::Label* positionLabel =
+      Gtk::manage( new Gtk::Label( "Enter position " ) );
+    Gtk::Entry* positionEntry = Gtk::manage( new Gtk::Entry() );
+
+    Gtk::Dialog positionDialog( "Search Position", *this, true );
+    Gtk::Button* okButton = positionDialog.add_button( "Ok", 1 );
+    Gtk::Button* cancelButton = positionDialog.add_button( "Cancel", 0 );
+    positionDialog.get_action_area()->set_layout( Gtk::BUTTONBOX_SPREAD );
+
+    positionEntry->set_activates_default( true );
+    okButton->set_can_default();
+    okButton->grab_default();
+
+    positionDialog.set_size_request( 200, 100 );
+    positionDialog.get_vbox()->pack_start(
+      *positionLabel, Gtk::PACK_SHRINK, 10 );
+    positionDialog.get_vbox()->pack_start(
+      *positionEntry, Gtk::PACK_SHRINK, 10 );
+    positionDialog.show_all();
+
+    uint8_t response = positionDialog.run();
+
+    if ( response ) {
+      std::cout << "The response was ok\n";
+      std::cout << "The text in the entry is: " << positionEntry->get_text();
+    } else {
+      std::cout << "The response was cancel\n";
+    }
   }
 }
 
 void
-HexV::errorMessage( const Glib::ustring& text, const Glib::ustring& subtext )
+HexV::errorDialog( const Glib::ustring& text, const Glib::ustring& subtext )
 {
   Gtk::MessageDialog dialog( *this, text );
   dialog.set_secondary_text( subtext );

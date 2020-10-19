@@ -70,7 +70,7 @@ class HexV : public Gtk::Window
   };
   void searchPosition();
   void about();
-  void errorMessage( const Glib::ustring& text, const Glib::ustring& subtext );
+  void errorDialog( const Glib::ustring& text, const Glib::ustring& subtext );
   void exit() { hide(); };
 
 public:
